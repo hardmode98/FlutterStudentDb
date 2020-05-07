@@ -128,13 +128,16 @@ class Fetcher{
 
   }
 
-  Future<dynamic> getTopThreeSchools() async {
+  Future<dynamic> getAnalytics({String district , String schoolName, String subjectName}) async {
     final queryParameters = {
-      'result_type': 'annual'
+      'result_type': 'annual',
+      'district' : district,
+      'name' : schoolName,
+      'subject' : subjectName
     };
 
     try{
-      Response response = await get(Uri.http("192.168.0.60:3000", '/topThreeSchools', queryParameters)).timeout(Duration(seconds: 15));
+      Response response = await get(Uri.http("192.168.0.60:3000", 'students/getAllAnalytics', queryParameters)).timeout(Duration(seconds: 15));
       return json.decode(response.body);
     }catch(error){
       print(error);
