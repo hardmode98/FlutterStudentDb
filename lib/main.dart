@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studentdb/MainAcitivty.dart';
+import 'package:studentdb/Activities/MainAcitivty.dart';
 
 void main() => runApp(MyApp());
 

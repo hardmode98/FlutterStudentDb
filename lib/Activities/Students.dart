@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:studentdb/Fetcher.dart';
-import 'package:studentdb/UIHelper.dart';
+import 'package:studentdb/Helpers/Fetcher.dart';
+import 'package:studentdb/Helpers/UIHelper.dart';
 
-import 'Student.dart';
+import '../Models/Student.dart';
 
 //declare vars here
 UIHelper _uiHelper;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:studentdb/Fetcher.dart';
-import 'UIHelper.dart';
+import 'package:studentdb/Helpers/Fetcher.dart';
+import 'package:studentdb/Helpers/UIHelper.dart';
 
 class Analytics extends StatefulWidget {
   @override

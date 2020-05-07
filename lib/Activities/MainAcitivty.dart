@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:studentdb/Analytics.dart';
-import 'package:studentdb/Fetcher.dart';
-import 'package:studentdb/Students.dart';
+import 'package:studentdb/Activities/Analytics.dart';
+import 'package:studentdb/Helpers/Fetcher.dart';
+import 'package:studentdb/Activities/Students.dart';
 
 class MainActivity extends StatefulWidget {
   @override

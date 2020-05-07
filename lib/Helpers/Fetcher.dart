@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:http/http.dart';
 import 'dart:convert';
-import 'Student.dart';
+import '../Models/Student.dart';
 
 
 class Fetcher{
