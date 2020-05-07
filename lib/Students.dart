@@ -61,44 +61,100 @@ class _StudentsState extends State<Students> {
             ),)
           ])),
 
-          new Container(
-            margin: const EdgeInsets.only(left: 15 , top: 5 ,bottom: 10 , right: 15),
-            padding: const EdgeInsets.all(0.0),
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.green),
-                borderRadius: BorderRadius.all(Radius.circular(8))
-            ),
-            child: _uiHelper.getPadding(EdgeInsets.all(0), Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                _uiHelper.getRow(MainAxisAlignment.start, [
-                  _uiHelper.getPadding(EdgeInsets.only(left: 15 ,top: 15 , bottom: 5), Text('Check all of your students here.', style: GoogleFonts.lato(
-                      fontSize: 20, fontWeight: FontWeight.w600
-                  ),))
-                  ,
-                ]),
-                _uiHelper.getRow(MainAxisAlignment.start, [
-                  Expanded(child: _uiHelper.getPadding(EdgeInsets.only(left: 15 , bottom: 10), Text('You can check all students stats , like annual and quaterly marks, and check all top students and other stats.', style: GoogleFonts.lato(
-                      fontSize: 13, fontWeight: FontWeight.w300
-                  ),)))
-                  ,
-                ])
-              ],
-            )),
-          ),
 
-          Divider(
-            height: 10,
-            thickness: 1.5,
-          ),
+
 
 
           FutureBuilder(builder: (context , AsyncSnapshot snap){
             return Expanded(
                 child: ListView.builder(itemCount: Fetcher.students.length ,itemBuilder: (context, position) {
                   return Card(
-                    margin: EdgeInsets.all(10),
-                    child: _uiHelper.getPadding(EdgeInsets.all(5), Text(Fetcher.students[position].name_of_student)),
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))
+                    ),
+                    margin: EdgeInsets.all(15),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+
+                        _uiHelper.getRow(MainAxisAlignment.start, [
+                          _uiHelper.getPadding(EdgeInsets.only(left: 15 , top: 20), Text(Fetcher.students[position].name_of_student , style: GoogleFonts.lato(
+                            fontSize: 19,
+                            fontWeight: FontWeight.w600,
+                          ),)),
+                        ]),
+                        _uiHelper.getRow(MainAxisAlignment.start, [
+                          _uiHelper.getPadding(EdgeInsets.only(left: 15 , top: 5), Text(Fetcher.students[position].school['name'] , style: GoogleFonts.lato(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),)),
+                        ]),
+                        _uiHelper.getRow(MainAxisAlignment.start, [
+                          _uiHelper.getPadding(EdgeInsets.only(left: 15 , top: 3), Text(Fetcher.students[position].school['district'] , style: GoogleFonts.lato(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),)),
+                        ]),
+
+                        Divider(),
+
+                        _uiHelper.getRow(MainAxisAlignment.start, [
+                          _uiHelper.getPadding(EdgeInsets.only(left: 15 , top: 5), Text("Performance in School" , style: GoogleFonts.lato(
+                            fontSize: 13,
+                            color: Colors.grey[800],
+                            fontWeight: FontWeight.w400,
+                          ),)),
+                        ]),
+
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          height: 340,
+                          child: ListView.builder(itemCount: Fetcher.students[position].subject.length ,itemBuilder: (con , pos){
+                            return _uiHelper.getRow(MainAxisAlignment.start, [
+                              Expanded(child:
+                              new Container(
+                                margin: const EdgeInsets.only(left: 5 , top: 5 ,bottom: 10 , right: 5),
+                                padding: const EdgeInsets.all(0.0),
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black38),
+                                    borderRadius: BorderRadius.all(Radius.circular(8))
+                                ),
+                                child: ListTile(
+                                  dense: true,
+                                  isThreeLine: true,
+                                  trailing: Card(
+                                    child: Container(
+                                      height: 25 , width: 50,
+                                      child: Center(child: Text("${Fetcher.students[position].subject[0]['annual']} / 100", style: GoogleFonts.lato(
+                                          fontWeight: FontWeight.w600, fontSize: 10, color: Colors.white
+                                      ),),)
+                                    ),
+                                    color: Colors.green,
+                                  ),
+                                  title: Text(Fetcher.students[position].subject[pos]['subject'], style: GoogleFonts.lato(
+                                      fontWeight: FontWeight.w600
+                                  ),),
+                                  subtitle: Text("The student's quaterly performace has resulted in these marks ${Fetcher.students[position].subject[0]['quaterly']} / 100", style: GoogleFonts.lato(
+                                      fontWeight: FontWeight.w600
+                                  ),),
+                                  leading: CircleAvatar(
+                                    backgroundColor: Colors.grey[800],
+                                    child: Center(
+                                      child: Text("${pos+1}" , style: GoogleFonts.ptSans(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white
+                                      ),),
+                                    ),
+                                  ),
+
+                                ),))
+                            ]);
+                          }),
+                        )
+
+                      ],
+                    ),
                   );
                 }, controller: _controller,));
           }, future: _fetcher.fetchStudents(skip: Fetcher.students.length , limit: 20 ))

@@ -86,7 +86,7 @@ class Fetcher{
         Map<String, String> headers = {"Content-type": "application/json"};
         Response response = await post("$ADD_Student_URL"  , headers: headers, body: jsonEncode(
             Student(
-                name_of_student:i.toString(),
+                name_of_student:names[randomNumber],
                 school: Map.of(<String , dynamic>{
                   'name':schools[schoolIndex],
                   'district': areas[areasIndex]
@@ -126,6 +126,20 @@ class Fetcher{
       // from 0 upto 99 included
     }
 
+  }
+
+  Future<dynamic> getTopThreeSchools() async {
+    final queryParameters = {
+      'result_type': 'annual'
+    };
+
+    try{
+      Response response = await get(Uri.http("192.168.0.60:3000", '/topThreeSchools', queryParameters)).timeout(Duration(seconds: 15));
+      return json.decode(response.body);
+    }catch(error){
+      print(error);
+      return null;
+    }
   }
 
 
