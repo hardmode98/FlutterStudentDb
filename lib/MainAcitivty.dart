@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studentdb/Analytics.dart';
 import 'package:studentdb/Fetcher.dart';
 import 'package:studentdb/Students.dart';
 
@@ -31,15 +32,15 @@ class _MainActivityState extends State<MainActivity> {
       },items: [
         BottomNavigationBarItem(icon: Icon(Icons.home) , title: Text("Home")),
         BottomNavigationBarItem(icon: Icon(Icons.person) , title: Text("Students")),
-      ]),
+      ],
+      currentIndex: _index,),
     ));
   }
 
   Widget getCurrentWidget (int index){
     switch(index){
-      case 0: return Students();
-      case 1: return Container();
-      case 2: return Container();
+      case 0: return Analytics();
+      case 1: return Students();
     }
   }
 }
